@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'userManagement';
+  value='';
+
+  userDetails = {
+    name:'',
+    email: ''
+  }
+
+  submit(form:any):void{
+    debugger
+    console.log(form.value);
+    console.log(this['userDetails'])
+  }
+
 }
