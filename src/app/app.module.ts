@@ -11,11 +11,15 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './features/auth/auth.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+// import { LoginComponent } from './features/auth/components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageComponent
+    PageComponent,
+    HomeComponent,
+    // LoginComponent
   ],
   imports: [
     BrowserModule,

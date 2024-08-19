@@ -3,36 +3,72 @@
     <div class="bg-white shadow p-3 mb-5 m-5 bg-body rounded border border-light">
 
         <div class="mb-5 m-5 my-5">
-            <span class="bar"></span>
+            
+            <!-- <span class="bar"></span> -->
             <h3>User Management System</h3>
+            
         </div>
     
         <div class="text-center mb-5">
             <h5 class="mb-3">SIGN IN</h5>
             <span>Enter your credentials to access your account</span>
         </div>
-    
+
+    <!-- server side error handling -->
+        <div *ngIf="apiErrorMessage" class="alert alert-danger" role="alert">
+            {{apiErrorMessage}}
+        </div>
+
+        <div *ngIf="apiSuccess" class="alert alert-success" role="alert">
+            {{apiSuccess}}
+        </div>
+
+  
+    <!-- server side success handling -->
+        <!-- <div *ngIf="apiSuccess" class="alert alert-danger" role="alert">
+            {{apiSuccess}}
+        </div> -->
+
         <div class="mt-5">
-            <form [formGroup]="loginForm" class="d-flex flex-column" (ngSubmit)="submitLoginForm()">
+            
+            <form [formGroup]="loginForm" class="d-flex flex-column" (ngSubmit)="handleForm()">
+                <div *ngIf="userID" class="alert alert-success" role="alert">
+                    <p>User ID: {{userID}}</p> 
+                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <!-- [(ngModel)]="emp" *ngIf="emp==apiSuccess" -->
+                    <!-- Ex: kholoud@gmail.com, -->
+                    <input matInput formControlName="name" placeholder="Ex: emilys" >
+                    
+                    <mat-error *ngIf="loginForm.controls?.['name']?.hasError('required')">name is required</mat-error>
+                    
+                    <mat-error *ngIf="loginForm.controls?.['name']?.hasError('touched')">name is Invalid</mat-error>
+                    <!-- <mat-error *ngIf="loginForm.controls?.['email']?.hasError('email')">Email is Invalid</mat-error> -->
+                </mat-form-field>
+            
+        <!--  -->
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="userName" placeholder="Placeholder">
+                    <input matInput formControlName="email" placeholder="ex: emilys@gmail.com">
                     
-                    <mat-error *ngIf="loginForm.controls?.['userName']?.hasError('required')">Email is <strong>required</strong> </mat-error>
+                    <mat-error *ngIf="loginForm.controls?.['email']?.hasError('required')">email is required</mat-error>
                     
-                    <mat-error *ngIf="loginForm.controls?.['userName']?.hasError('email')">Email is <strong>not correct</strong> </mat-error>
-                </mat-form-field>
-        <!-- <strong></strong> -->
-                <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input type="password" matInput formControlName="password" placeholder="Placeholder">
+                    <!-- <mat-error *ngIf="loginForm.controls?.['email']?.hasError('pattern')">email Must be at least 6 characters</mat-error> -->
+                    <mat-error *ngIf="loginForm.controls?.['email']?.hasError('touched')">email is required</mat-error>
+
                 </mat-form-field>
             
                 <div class="d-flex">
-                    <button (click)="submitLoginForm()" class="btn login-btn w-100 text-white py-2">
+                    <!-- <button [disabled]="hidden" (click)="submitLoginForm()" type="submit" class="btn login-btn w-100 text-white py-2"> -->
+                    <button  [disabled]="loginForm.invalid"  type="submit" class="btn login-btn w-100 text-white py-2">
                         SIGN IN
                     </button>
                 </div>
+                <p *ngIf="errMsg" class="alert alert-danger mt-3 text-center">
+                    {{ errMsg }}
+                </p>
+        
             </form>
 
         </div>
@@ -42,3 +78,7 @@
 
 
 </div>
+
+
+<!-- emily.johnson@x.dummyjson.com
+    emilyspass -->
